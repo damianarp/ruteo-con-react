@@ -3,9 +3,16 @@ import './App.css';
 //Importamos Routes para poder implementarlo.
 import Routes from './routes';
 
-//La app va a retornar todas las rutas aquí.//La app va a retornar todas las rutas aquí.
+// Importamos el componente Pokemon
+import PokemonProvider from "./context/pokemons/Provider";
+
+//La app retorna el provider que engloba el resto de la aplicación.
 function App() {
-  return <Routes />;
+  return (
+    <PokemonProvider>
+      <Routes />
+    </PokemonProvider>
+  );
 }
 
 export default App;
