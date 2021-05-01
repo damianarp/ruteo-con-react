@@ -18,7 +18,7 @@ export default function Home() {
     useEffect(() => {
         getPokemons().catch(null);
     }, []);
-    console.log(pokemons);
+
     return (
         <div>
             <PokemonList pokemons={pokemons}/>
