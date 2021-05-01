@@ -11,9 +11,11 @@ import PokemonContext from "../../context/pokemons";
 // Hacemos destructuring de id utilizando el hook useParams.
 // Utilizamos el contexto creado previamente.
 // Obtenemos el detalle del pokemon a través de la función getPokemonDetail(id) y hacemos un catch nulo para que no se cachée.
+
+// Retornamos los datos que elijamos del json.
 export default function PokeDetail() {
     const { id } = useParams();
-    const { getPokemonDetail, pokemonDetail } = useContext(PokemonContext);
+    const { getPokemonDetail, pokemonDetail, isLoading } = useContext(PokemonContext);
     
     useEffect(() => {
         /**
@@ -22,8 +24,24 @@ export default function PokeDetail() {
         */
        getPokemonDetail(id).catch(null);
     }, []);
-    console.log(pokemonDetail);
+
+    if (isLoading) {
+        return (
+            <p>Cargando pokemon...</p>
+        );
+    }
+
     return (
-        <div>PokeDetail</div>
+        <div>
+            <img 
+                alt={`Imagen de ${pokemonDetail?.name}`} 
+                src={pokemonDetail?.front_default}
+                width={200}
+            />
+            <p>{`Nombre: ${pokemonDetail?.name}`}</p>
+            <p>{`Peso: ${pokemonDetail?.weight}00 g`}</p>
+            <p>{`Altura: ${pokemonDetail?.height}0 cm`}</p>
+
+        </div>
     );
 }
