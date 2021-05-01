@@ -10,10 +10,14 @@ import Four0Four from '../views/404';
 // Importamos la ruta PokeDetail para poder implementarla.
 import PokeDetail from '../views/PokeDetail';
 
+// Importamos el hook useScrollToTop para implementarlo
+import ScrollToTop from "../components/ScrollToTop";
+
 // Exportamos una función para el ruteo de páginas
 export default function Routes() {
     return(
         <Router>
+            <ScrollToTop />
             <Switch>
                 <Route path="/" exact>
                     <Home />

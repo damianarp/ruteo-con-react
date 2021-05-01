@@ -13,11 +13,17 @@ import PokemonList from "./components/PokemonList";
 // A través del useEffect llamamos a la función getPokemons, unicamente durante la primera carga, para eso le colocamos corchetes vacíos (y le agregamos el catch como nulo porque es una función asíncrona).
 // Retornamos un div con el componente PokemonList y le pasamos como propiedad pokemons para que nos muestre el valor que viene del contexto.
 export default function Home() {
-    const {getPokemons, pokemons} = useContext(PokemonContext);
+    const {getPokemons, pokemons, isLoading} = useContext(PokemonContext);
 
     useEffect(() => {
         getPokemons().catch(null);
     }, []);
+
+    if (isLoading) {
+      return (
+        <p>Cargando resultados...</p>
+      ); 
+    };
 
     return (
         <div>
