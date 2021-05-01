@@ -37,7 +37,7 @@ export default function PokemonProvider({children}) {
     const getPokemonDetail = async (id) => {
         if (!id) Promise.reject("Id es requerido");
         try {
-            const pokemonDetail = await apiCall({url: `https://pokeapi.co/api/v2/item/${id}`});
+            const pokemonDetail = await apiCall({url: `https://pokeapi.co/api/v2/pokemon/${id}`});
             setPokemonDetail(pokemonDetail);
         } catch (error) {
             setPokemonDetail({});
