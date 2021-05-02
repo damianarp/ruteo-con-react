@@ -6,9 +6,9 @@ import PokemonListItem from "./PokemonListItem"
 // Además le pasamos pokemon como propiedad en forma de spread {...pokemon} que es equivalente a hacer pokemon.name y pokemon.url
 export default function PokemonList({pokemons}) {
     return (
-        <div>
+        <>
             {pokemons?.map((pokemon, index) => <PokemonListItem key={index} {...pokemon}/>
             )}
-        </div>
+        </>
     );
 }

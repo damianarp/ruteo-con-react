@@ -17,6 +17,7 @@ export default function Home() {
 
     useEffect(() => {
         getPokemons().catch(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (isLoading) {
@@ -25,9 +26,5 @@ export default function Home() {
       ); 
     };
 
-    return (
-        <div>
-            <PokemonList pokemons={pokemons}/>
-        </div>
-    );
+    return <PokemonList pokemons={pokemons}/>;
 }
