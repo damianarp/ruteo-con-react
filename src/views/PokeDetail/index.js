@@ -7,8 +7,18 @@ import { useEffect, useContext } from "react";
 // Importamos el contexto
 import PokemonContext from "../../context/pokemons";
 
-// Imposrtamos el componente PokeStats para implementarlo
+// Importamos el componente Loading
+import Loading from "../../components/Loading";
+
+// Importamos el componente PokeStats para implementarlo
 import PokeStats from "./components/PokeStats";
+
+// Importamos el componente de ErrorMesagge
+import ErrorMessage from "../../components/ErrorMessage"; 
+
+// Importamos el componente PokePhoto para implementarlo
+import PokePhoto from "./components/PokePhoto";
+
 
 // Exportamos una función que retorne el detalle de los pokemones.
 // Hacemos destructuring de id utilizando el hook useParams.
@@ -18,7 +28,7 @@ import PokeStats from "./components/PokeStats";
 // Retornamos los datos que elijamos del json.
 export default function PokeDetail() {
     const { id } = useParams();
-    const { getPokemonDetail, pokemonDetail, isLoading } = useContext(PokemonContext);
+    const { getPokemonDetail, pokemonDetail, isLoading, hasError, errorMessage } = useContext(PokemonContext);
     
     useEffect(() => {
         /**
@@ -29,28 +39,25 @@ export default function PokeDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (isLoading) {
-        return (
-            <p>Cargando pokemon...</p>
-        );
-    }
+    if (isLoading) return <Loading title="Cargando pokemons..."/>;
 
     return (
         <div>
-            <h3 style={{marginTop: 15, marginBottom: 10}}>Info General</h3>
+            {hasError ? <ErrorMessage message={errorMessage}/> : (
+                <>
+                    <h3 style={{marginTop: 15, marginBottom: 10}}>Info General</h3>
 
-            <img 
-                alt={`Imagen de ${pokemonDetail?.name}`} 
-                src={pokemonDetail?.front_default ?? []}
-                width={200}
-            />
-            <p>{`Nombre: ${pokemonDetail?.name}`}</p>
-            <p>{`Peso: ${pokemonDetail?.weight}00 g`}</p>
-            <p>{`Altura: ${pokemonDetail?.height}0 cm`}</p>
-            <div>
-                <h3 style={{marginTop: 30, marginBottom: 10}}>Habilidades</h3>
-                <PokeStats stats={pokemonDetail?.stats ?? []} />
-            </div>
+                    <PokePhoto />            
+                    <p>{`Nombre: ${pokemonDetail?.name}`}</p>
+                    <p>{`Peso: ${pokemonDetail?.weight}00 g`}</p>
+                    <p>{`Altura: ${pokemonDetail?.height}0 cm`}</p>
+                    <div>
+                        <h3 style={{marginTop: 30, marginBottom: 10}}>Habilidades</h3>
+                        <PokeStats stats={pokemonDetail?.stats ?? []} />
+                    </div>
+                </>
+            )}
+            
 
         </div>
     );
