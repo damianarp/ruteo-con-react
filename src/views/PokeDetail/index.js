@@ -16,10 +16,6 @@ import PokeStats from "./components/PokeStats";
 // Importamos el componente de ErrorMesagge
 import ErrorMessage from "../../components/ErrorMessage"; 
 
-// Importamos el componente PokePhoto para implementarlo
-import PokePhoto from "./components/PokePhoto";
-
-
 // Exportamos una función que retorne el detalle de los pokemones.
 // Hacemos destructuring de id utilizando el hook useParams.
 // Utilizamos el contexto creado previamente.
@@ -47,7 +43,11 @@ export default function PokeDetail() {
                 <>
                     <h3 style={{marginTop: 15, marginBottom: 10}}>Info General</h3>
 
-                    <PokePhoto />            
+                    <img 
+                        alt={`Imagen de ${pokemonDetail?.name}`} 
+                        src={pokemonDetail?.sprites?.other["official-artwork"]?.front_default}
+                        width={200}
+                    />            
                     <p>{`Nombre: ${pokemonDetail?.name}`}</p>
                     <p>{`Peso: ${pokemonDetail?.weight}00 g`}</p>
                     <p>{`Altura: ${pokemonDetail?.height}0 cm`}</p>
